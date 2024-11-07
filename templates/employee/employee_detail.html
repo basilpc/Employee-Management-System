@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Details</title>
+</head>
+<body>
+    <h1>Employee Details</h1>
+
+    <h2>{{ employee.name }}</h2>
+    <p><strong>Email:</strong> {{ employee.email }}</p>
+    <p><strong>Position:</strong> {{ employee.position }}</p>
+
+    <h3>Custom Fields</h3>
+    <ul>
+        {% for field in employee.custom_fields.all %}
+            <li><strong>{{ field.field_name }}:</strong> {{ field.field_value }}</li>
+        {% empty %}
+            <p>No custom fields available for this employee.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>

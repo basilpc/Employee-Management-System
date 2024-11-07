@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee List</title>
+    <!-- Link to Bootstrap CSS for styling -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Additional custom styling */
+        body {
+            background-color: #f8f9fa;
+        }
+        .employee-card {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .employee-card h2 {
+            color: #007bff;
+            font-size: 1.5rem;
+        }
+        .custom-field-list {
+            list-style: none;
+            padding: 0;
+        }
+        .custom-field-list li {
+            margin-bottom: 8px;
+        }
+        .custom-field-list strong {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center my-4">Employee List</h1>
+
+        {% if employees %}
+            <div class="row">
+                {% for employee in employees %}
+                    <div class="col-md-6">
+                        <div class="employee-card">
+                            <h2>{{ employee.name }}</h2>
+                            <p><strong>Email:</strong> {{ employee.email }}</p>
+                            <p><strong>Position:</strong> {{ employee.position }}</p>
+                            <h5>Custom Fields</h5>
+                            <ul class="custom-field-list">
+                                {% for field in employee.custom_fields.all %}
+                                    <li><strong>{{ field.field_name }}:</strong> {{ field.field_value }}</li>
+                                {% empty %}
+                                    <li>No custom fields available.</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-center">No employees found.</p>
+        {% endif %}
+    </div>
+
+    <!-- Optional JavaScript and Bootstrap Bundle with Popper -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
